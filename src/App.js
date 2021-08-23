@@ -11,12 +11,12 @@ import Button from "./Components/Button";
 
 class App extends Component{
   state = {
-    searchQuerry: '',
+    searchQuerry: null,
     page: 1, 
   }
   
   handleFormSubmit = (searchQuerry) => {
-    this.setState({searchQuerry})
+    this.setState({ searchQuerry })
   }
 
   handleLoadMore = (page) => {
@@ -24,15 +24,15 @@ class App extends Component{
   }
   
   render() {
-    const searchQuerry = this.state;
+    const {searchQuerry, page} = this.state;
 
     return (
       <div>
         <Searchbar onSubmit={this.handleFormSubmit}/>
+        {this.state.searchQuerry &&
+          <ImageGallery searchQuerry={searchQuerry} page={page} />}
         {searchQuerry &&
-          <ImageGallery searchQuerry={this.state.searchQuerry} page={this.state.page} />}
-        {searchQuerry.searchQuerry &&
-          <Button onLoadMore={this.handleLoadMore} page={this.state.page} />}
+          <Button onLoadMore={this.handleLoadMore} page={page} />}
         
         
         <ToastContainer />

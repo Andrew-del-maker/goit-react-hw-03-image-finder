@@ -32,6 +32,8 @@ class Searchbar extends Component{
     }
     handleSearchChange = event => {
         this.setState({ searchQuerry: event.currentTarget.value.toLowerCase() });
+
+
     };
 
     handleFormSubmit = event => {
@@ -49,9 +51,10 @@ class Searchbar extends Component{
             return;
         }
         this.props.onSubmit(this.state.searchQuerry);
-        this.setState({searchQuerry: ''})
+        this.setState({ searchQuerry: '' })
     }
     render() {
+        
         return (
 
             <header className="Searchbar">
