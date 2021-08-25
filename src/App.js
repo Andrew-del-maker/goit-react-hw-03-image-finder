@@ -3,7 +3,8 @@ import { Component } from "react";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.scss'
-  import styled from "styled-components";
+import styled from "styled-components";
+import api from './Services/pixabayApi'
 
 
 
@@ -15,7 +16,6 @@ import Modal from "./Components/Modal";
 
 
 
-const KEY = '21893197-6d6aad5e906c416c50a626e1f';
 
 const Btn = styled.button`
   display: inline-block;
@@ -51,13 +51,13 @@ class App extends Component{
         
     if (this.state.searchQuerry !== prevState.searchQuerry) {
             this.setState({ loading: true , searchPictures: null, page: 1});
-            fetch(`https://pixabay.com/api/?q=${this.state.searchQuerry}&page=${this.state.page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`)
+            api(this.state.searchQuerry, this.state.page)
             .then(res => res.json())
             .then(searchPictures=> this.setState({searchPictures: searchPictures.hits})).finally(()=>{this.setState({loading:false})})
         }
         if (prevState.page !== this.state.page) {
             this.setState({ page: this.state.page })
-            fetch(`https://pixabay.com/api/?q=${this.state.searchQuerry}&page=${this.state.page}&key=${KEY}&image_type=photo&orientation=horizontal&per_page=12`)
+            api(this.state.searchQuerry, this.state.page)
             .then(res => res.json())
                 .then(newPictures => this.setState({ searchPictures: [...this.state.searchPictures, ...newPictures.hits] })).then(setTimeout(() => {
                     window.scrollTo({
