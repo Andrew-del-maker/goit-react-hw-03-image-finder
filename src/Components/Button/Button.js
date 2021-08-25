@@ -15,19 +15,10 @@ const Button = styled.button`
 `;
 
 class ButtonComponent extends Component {
-    state = {
-        page: 2,
-    }
-    
-    
-    onLoadMore = () => {
-        this.setState({ page: this.state.page + 1 });
-        this.props.onLoadMore(this.state.page);
-    };
-   
+       
     render(){
         return (
-            <Button type='button' className='btn' onClick={this.onLoadMore}>
+            <Button type='button' className='btn' onClick={this.props.onLoadMore}>
             Load more
         </Button>
         )
@@ -36,7 +27,6 @@ class ButtonComponent extends Component {
 
 ButtonComponent.propTypes = {
     onLoadMore: PropTypes.func.isRequired,
-    page: PropTypes.number.isRequired,
 }
 
 export default ButtonComponent;
